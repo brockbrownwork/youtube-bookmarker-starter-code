@@ -7,6 +7,8 @@ chrome.tabs.onUpdated.addListener((tabId, tab) => {
     const queryParameters = tab.url.split("?")[1];
     // create an object to access different parts of the query parameters
     const urlParameters = new URLSearchParams(queryParameters);
+    // do a check to make sure it's working
+    console.log(urlParameters);
     // send a message through the tabs API that says we started watching
     // a youtube video with this unique ID
     chrome.tabs.sendMessage(tabId, {
