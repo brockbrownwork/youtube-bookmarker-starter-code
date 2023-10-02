@@ -32,14 +32,14 @@
 
                 youtubeLeftControls = document.getElementsByClassName("ytp-left-controls")[0];
                 youtubePlayer = document.getElementsByClassName("video-stream")[0];
-
                 youtubeLeftControls.appendChild(bookmarkButton);
                 bookmarkButton.addEventListener("click", addNewBookmarkHandler);
             }
         }
 
         const addNewBookmarkHandler = (e) => {
-            console.log("clicked!")
+            console.log("clicked!");
+            console.log("Current time: " + youtubePlayer.currentTime);
         }
         // IMPORTANT: this calls newVideoLoaded any time our content
         // script matches youtube.com.
