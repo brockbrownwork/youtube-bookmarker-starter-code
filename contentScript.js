@@ -2,6 +2,7 @@
     () => {
         let youtubeLeftControls, youtubePlayer;
         let currentVideo = "";
+        let currentVideoBookmarks = [];
         // listen to messages sent to the tabs API
         chrome.runtime.onMessage.addListener((obj, sender, response) => {
             // obj: the object we're sending from the bg script
@@ -40,6 +41,16 @@
         const addNewBookmarkHandler = (e) => {
             console.log("clicked!");
             console.log("Current time: " + youtubePlayer.currentTime);
+            const currentTime = youtubePlayer.currentTime;
+            const newBookmark = {
+                time: currentTime,
+                description: `Bookmark at ${Math.floor(currentTime / 60)}:${currentTime % 60}`
+            };
+            currentVideoBookmarks.push(newBookmark);
+            console.log(newBookmark);
+            chrome.storage.sync.set({
+                [currentVideo]: JSON.stringify([...currentVideoBookmarks, newBookmark].sort((a, b) => a.time - b.time))
+            });
         }
         // IMPORTANT: this calls newVideoLoaded any time our content
         // script matches youtube.com.
